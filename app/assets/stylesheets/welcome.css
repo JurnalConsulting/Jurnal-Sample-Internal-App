@@ -1,0 +1,107 @@
+// Place all the styles related to the Welcome controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+body{
+  background: #00303c;
+  font-family: "Roboto-Light";
+  color: #403d37;
+}
+
+.flex-form{
+  display: flex;
+  align-items: center;
+}
+
+.green{
+  color: green;
+}
+
+.red{
+  color: red;
+}
+
+.button-width-100{
+  min-width: 100%;
+}
+
+.red-alert{
+  color: red;
+}
+
+.scrolling-content{
+  overflow: scroll;
+  height: 200px;
+}
+
+.simple-form-input{
+  border: none;
+  border-bottom: 1px solid #000000;
+  background-color: inherit;
+}
+
+.inline{
+  display: inline;
+}
+
+.syncing-box{
+  min-width: 400px;
+  max-width:600px;
+  background-color: #e6e7e8;
+  margin: auto;
+  height: auto;
+  border-radius:10px;
+  position: fixed;
+  top: 10%;
+  left: calc(50% - 185px);
+  word-break: break-all;
+  padding-right: 30px;
+}
+
+.footer{
+  margin-top:20px;
+}
+
+.maroon{
+  color: #9a4e3c;
+}
+
+.set_space{
+  margin-top:20px;
+}
+
+.button-box{
+  margin: inherit;
+  margin-right:10px;
+}
+
+.box-content{
+  margin-bottom: 10px;
+  padding-bottom: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 5px;
+  margin-left:20px;
+}
+
+.hidden{
+  display: none;
+}
+
+.adjust-margin-left{
+  margin-left: 20px;
+}
+
+h3{
+  display: inline-block;
+  margin-left: 15px;
+}
+
+.center{
+  text-align: center;
+}
+.title{
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #7a6a52;
+}

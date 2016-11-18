@@ -1,0 +1,36 @@
+.row.col-lg-6.col-md-6
+  .syncing-box
+    .box-content.col-lg-12
+      .title
+        .row.center
+          .row
+            .col-lg-12
+              = image_tag('jurnal-icon',:width => 70,:height => 70)
+            .col-lg-12
+              %h3
+                Jurnal Sample Application
+      .content
+        = simple_form_for @profile, :url => welcomes_path, :method => :post do |f|
+          .row.flex-form
+            .col-lg-6.col-md-6.col-sm-6
+              .row.form-group
+                .col-lg-12
+                  Username
+                .col-lg-8
+                  = f.input :username, label: false,input_html: { class: 'simple-form-input',placeholder: 'sample : jurnal_sample' }
+              .row.form-group
+                .col-lg-12
+                  Password
+                .col-lg-8
+                  = f.input :password,as: :password, label: false,input_html: { class: 'simple-form-input',placeholder: 'sample : nice' }
+            .col-lg-6.col-md-6.col-sm-6
+              - if @profile.error_message.present?
+                .row.red-alert.center 
+                  = @profile.error_message
+              .row
+                .access-token-button.center
+                  = f.submit "Log In",:class => "btn-primary uppercase btn btn-md center"
+
+
+- content_for :scripts do
+  = javascript_include_tag 'testing-library', "data-turbolinks-track" => true

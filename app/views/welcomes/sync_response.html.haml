@@ -1,0 +1,30 @@
+.syncing-box
+  .box-content.col-lg-12
+    .title
+      .row.center
+        .row
+          .col-lg-12
+            = image_tag('jurnal-icon',:width => 70,:height => 70)
+          .col-lg-12
+            %h3
+              Item List
+    .content.scrolling-content
+      .row
+        - if @items.count == 0
+          You don't have any 
+          = @type
+        - else
+          -@items.each do|item|
+            %li
+              %ul
+                -if @type == "customers"
+                  = item["display_name"]
+                -if @type == "products"
+                  = item["name"]
+    .button-box
+      .set_space
+        .row.center
+          = button_to "Back", profile_welcomes_path, class: "btn btn-primary",method: 'get'
+
+          
+        

@@ -1,0 +1,45 @@
+.syncing-box
+  .box-content.col-lg-12
+    .title
+      .row.center
+        .row
+          .col-lg-12
+            = image_tag('jurnal-icon',:width => 70,:height => 70)
+          .col-lg-12
+            %h3
+              Welcome
+    .content
+      .row.adjust-margin-left.access-token-info
+        .row
+          .btn.btn-primary.btn-get-token
+            Get Access Token
+          .setting-tooltip{:style => "display : inline;text-align:right"}
+            .fa.fa-question-circle.fa-1x.tooltip-trigger-settings{ :title => "This button triggers a Javascript action called JurnalIntegration.get_access_token() to get the access token given from Jurnal to access user data", :rel => "tooltip", 'data-placement' => 'right', :data => {:toggle=>"tooltip"} }
+        .row.access-token-div
+          %h4
+            Your Access Token is 
+            %br
+              %code#profile-access-token
+                
+        .row.action-div
+          %h4
+            Choose Your Action
+          .button-box
+            .col-lg-6.col-md-6.col-sm-6
+              .set_space
+                .btn.btn-primary.fetch-customer.button-width-100.tooltip-trigger-settings{ :title => "By clicking this button you will get customers data from Jurnal based from the access token given", :rel => "tooltip", 'data-placement' => 'right', :data => {:toggle=>"tooltip"} }
+                  Get Customers
+              .set_space
+                .btn.btn-primary.fetch-product.button-width-100.tooltip-trigger-settings{ :title => "By clicking this button you will get products data from Jurnal based from the access token given", :rel => "tooltip", 'data-placement' => 'right', :data => {:toggle=>"tooltip"} }
+                  Get Products
+            .col-lg-6.col-md-6.col-sm-6
+              .set_space
+                .btn.btn-success.enable-webhook.button-width-100{disabled: true}
+                  Enable Webhook
+              .set_space
+                .btn.btn-success.add-sales-invoice.button-width-100.tooltip-trigger-settings{ :title => "By clicking this button you will create sales invoice to Jurnal account based from the access token given", :rel => "tooltip", 'data-placement' => 'right', :data => {:toggle=>"tooltip"} }
+                  Create Sales Invoice
+
+
+- content_for :scripts do
+  = javascript_include_tag 'profile', "data-turbolinks-track" => true

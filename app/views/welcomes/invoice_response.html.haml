@@ -1,0 +1,41 @@
+.row.col-lg-6.col-md-6
+  .syncing-box
+    .box-content.col-lg-12
+      .title
+        .row.center
+          .row
+            .col-lg-12
+              = image_tag('jurnal-icon',:width => 70,:height => 70)
+            .col-lg-12
+              %h3
+                Jurnal Sample Application
+      .content
+        .center
+          %h4
+            -if @new_sales_invoice.code == "201" 
+              SUCCESS
+              .fa.fa-check-circle.green
+              %br
+                %h6 
+                  Please Check Your Invoice in your Jurnal account
+            -else
+              FAIL
+              .fa.fa-times-circle.red
+              %br 
+                %h6
+                  Your Data cannot be inserted to your Jurnal account
+        .row
+          .col-lg-12
+            Response:
+          .col-lg-12.code-wrapper
+            %code
+              = @new_sales_invoice.response_body
+
+      .row.footer.text-right
+        = link_to "Back To Profile Menu", profile_welcomes_path, class: "btn btn-primary", method: :get
+        .btn.btn-success.add-sales-invoice
+          Create More
+          
+        
+- content_for :scripts do
+  = javascript_include_tag 'profile', "data-turbolinks-track" => true

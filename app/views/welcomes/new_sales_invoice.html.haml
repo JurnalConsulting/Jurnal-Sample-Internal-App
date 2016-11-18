@@ -1,0 +1,39 @@
+.row.col-lg-6.col-md-6
+  .syncing-box
+    .box-content.col-lg-12
+      .title
+        .row.center
+          .row
+            .col-lg-12
+              = image_tag('jurnal-icon',:width => 70,:height => 70)
+            .col-lg-12
+              %h3
+                Insert Sales Invoice
+      .content
+        = simple_form_for @new_invoice, :url => create_sales_invoice_welcomes_path, :method => :post do |f|
+          = f.input :jurnal_access_token, as: :hidden,input_html: {value: @new_invoice.access_token} 
+          .row.flex-form
+            .col-lg-12
+              .row.form-group
+                .col-lg-4.col-md-4.col-sm-4
+                  Transaction No
+                .col-lg-8.col-md-8.col-sm-8
+                  = f.input :transaction_no, label: false,input_html: { class: 'simple-form-input' }
+              .row.form-group
+                .col-lg-4.col-md-4.col-sm-4
+                  Customer
+                .col-lg-8.col-md-8.col-sm-8
+                  = f.input :customer, label: false, collection: @customers_collection,selected: @customers_collection.first, input_html: { class: 'simple-form-input' }
+              .row.form-group
+                .col-lg-4.col-md-4.col-sm-4
+                  Deposit Account
+                .col-lg-8.col-md-8.col-sm-8
+                  = f.input :deposit_account, label: false, collection: @deposit_account_collection,selected: @deposit_account_collection.first, input_html: { class: 'simple-form-input' }
+              - if @new_invoice.error_message.present?
+                .row.red-alert.center 
+                  = @new_invoice.error_message
+          .row
+            .col-lg-12.text-right
+              = link_to "Back", profile_welcomes_path, class: "btn btn-primary", method: :get
+              = f.submit "Create",:class => "btn-success uppercase btn btn-md"
+              

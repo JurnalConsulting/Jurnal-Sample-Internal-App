@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       get :enable_webhook
       get :new_sales_invoice
       post :create_sales_invoice
+      get :webhook_history_log
     end
   end
 
@@ -14,6 +15,10 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'welcomes#index'
+
+  post "/" => "welcomes#push_to_webhook"
+
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

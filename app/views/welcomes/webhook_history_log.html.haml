@@ -1,0 +1,44 @@
+.syncing-box
+  .box-content.col-lg-12
+    .title
+      .row.center
+        .row
+          .col-lg-12
+            = image_tag('jurnal-icon',:width => 70,:height => 70)
+          .col-lg-12
+            %h3
+              Webhook History Log
+    .content.table-overflow
+      .row.adjust-margin-left.access-token-info
+        - if @records.nil?
+          No Recorded Log Yet
+        - else
+          .row
+            %div
+              %table{border: '1', width: '90%'}
+                %thead
+                  %th.text-center{style: 'min-width:7em;'}
+                    Object
+                  %th.text-center{style: 'min-width:7em;'}
+                    Action
+                  %th.text-center{style: 'min-width:10em;'}
+                    Object Detail
+                %tbody
+                  - @records.each do |record|
+                    %tr
+                      %td.text-center
+                        = record.topic
+                      %td.text-center
+                        = record.action
+                      %td
+                        %code
+                          = record.content
+            
+
+
+
+
+
+
+    .row.footer.center
+      = button_to "Back", profile_welcomes_path, class: "btn btn-primary",method: 'get'

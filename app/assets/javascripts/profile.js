@@ -34,9 +34,9 @@ $(document).ready(function(){
     window.location.replace(window.location.origin +"/welcomes/sync_response"+ "?access_token=" + JurnalIntegration.get_access_token() + "&type=products");
   });
 
-  // $('.enable-webhook').click(function(){
-  //   window.location.replace(window.location.origin +"/welcomes/enable_webhook"+ "?access_token=" + JurnalIntegration.get_access_token());
-  // });
+  $('.enable-webhook').click(function(){
+    window.location.replace(window.location.origin +"/welcomes/enable_webhook"+ "?access_token=" + JurnalIntegration.get_access_token());
+  });
 
   $('.add-sales-invoice').click(function(){
     window.location.replace(window.location.origin +"/welcomes/new_sales_invoice"+ "?access_token=" + JurnalIntegration.get_access_token());

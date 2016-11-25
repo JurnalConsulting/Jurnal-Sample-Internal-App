@@ -10,7 +10,28 @@ class WelcomesController < ApplicationController
     @profile = Profile.new
   end
 
+  def webhook_history_log
+    @records = TableWebhookRecord.all
+  end
+
+  def push_to_webhook
+    webhook_param = params[:notification]
+    webhook_record = TableWebhookRecord.new
+
+    webhook_record.topic = webhook_param[:object]
+    webhook_record.content = webhook_param[:object_details]
+    webhook_record.action =  webhook_param[:action]
+    if webhook_record.save
+      puts "berhasil"
+      render json: {}, status: 200
+    else
+      puts "gagal"
+      render json: {}, status: 422
+    end
+  end
+
   def profile
+
   end
 
   def create
@@ -28,9 +49,11 @@ class WelcomesController < ApplicationController
   end
 
   def enable_webhook
-    synchronize = Synchronize.new(jurnal_access_token: params[:access_token])
-    @webhook_id = synchronize.get_webhook_id
-    raise
+    @webhook_user = WebhookUser.new(jurnal_access_token: params[:access_token])
+    if !@webhook_user.get_webhook_id
+      TableWebhookRecord.delete_all
+      @webhook_user.create_webhook_id
+    end
   end
 
   def sync_response

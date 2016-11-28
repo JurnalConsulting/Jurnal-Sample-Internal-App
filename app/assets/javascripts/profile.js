@@ -42,6 +42,10 @@ $(document).ready(function(){
     window.location.replace(window.location.origin +"/welcomes/new_sales_invoice"+ "?access_token=" + JurnalIntegration.get_access_token());
   });
 
+  $('.delete-webhook').click(function(){
+    window.location.replace(window.location.origin +"/welcomes/delete_webhook"+ "?access_token=" + JurnalIntegration.get_access_token());
+  });
+
 
 
 });

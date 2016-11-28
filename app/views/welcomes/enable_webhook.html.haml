@@ -23,4 +23,8 @@
         
     .row.footer
       .col-lg-12.text-right
-        = button_to "Delete Webhook", profile_welcomes_path, class: "btn btn-danger",method: 'get'
+        .btn.btn-danger.delete-webhook
+          Delete Webhook
+
+- content_for :scripts do
+  = javascript_include_tag 'profile', "data-turbolinks-track" => true

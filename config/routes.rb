@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       get :new_sales_invoice
       post :create_sales_invoice
       get :webhook_history_log
+      get :delete_webhook
     end
   end
 

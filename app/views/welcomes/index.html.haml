@@ -16,13 +16,13 @@
               .row.form-group
                 .col-lg-12
                   Username
-                .col-lg-8
-                  = f.input :username, label: false,input_html: { class: 'simple-form-input',placeholder: 'sample : jurnal_sample' }
+                .col-lg-12
+                  = f.input :username, label: false,input_html: { class: 'simple-form-input',placeholder: 'For example: jurnal' }
               .row.form-group
                 .col-lg-12
                   Password
-                .col-lg-8
-                  = f.input :password,as: :password, label: false,input_html: { class: 'simple-form-input',placeholder: 'sample : nice' }
+                .col-lg-12
+                  = f.input :password,as: :password, label: false,input_html: { class: 'simple-form-input',placeholder: 'For example: 123456' }
             .col-lg-6.col-md-6.col-sm-6
               - if @profile.error_message.present?
                 .row.red-alert.center 

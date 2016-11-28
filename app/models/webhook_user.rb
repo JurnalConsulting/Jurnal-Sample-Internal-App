@@ -44,6 +44,27 @@ class WebhookUser < ActiveRecord::Base
     end
   end
 
+  def delete_webhook
+    require 'json'
+    require 'net/http'
+    require 'uri'
+    url = "#{JURNAL_ENDPOINT}/core/dev/oauth/webhooks?client_id=#{APP_CLIENT_ID}&access_token=#{access_token}"
+    encoded_url = URI.encode(url)
+    uri = URI.parse(encoded_url)
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.read_timeout = 600
+    http.use_ssl = true
+    request = Net::HTTP::Delete.new(uri.request_uri)
+    res = http.request(request)  
+    if res.code != "204"
+      self.code = res.code
+      return false
+    else
+      self.code = res.code
+      return true
+    end
+  end
+
   def create_webhook_id
     require 'json'
     require 'net/http'

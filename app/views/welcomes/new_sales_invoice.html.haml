@@ -8,7 +8,7 @@
               = image_tag('jurnal-icon',:width => 70,:height => 70)
             .col-lg-12
               %h3
-                Insert Sales Invoice
+                Create Sales Invoice
       .content
         = simple_form_for @new_invoice, :url => create_sales_invoice_welcomes_path, :method => :post do |f|
           = f.input :jurnal_access_token, as: :hidden,input_html: {value: @new_invoice.access_token} 

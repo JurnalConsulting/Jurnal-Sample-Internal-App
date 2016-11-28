@@ -14,7 +14,15 @@ class WelcomesController < ApplicationController
     @records = TableWebhookRecord.all
   end
 
+  def delete_webhook
+    @webhook_user = WebhookUser.new(jurnal_access_token: params[:access_token])
+    if @webhook_user.delete_webhook
+      redirect_to profile_welcomes_path
+    end
+  end
+
   def push_to_webhook
+    binding.pry
     webhook_param = params[:notification]
     webhook_record = TableWebhookRecord.new
 
@@ -31,12 +39,11 @@ class WelcomesController < ApplicationController
   end
 
   def profile
-
   end
 
   def create
-    if profile_params[:username]=="jurnal_sample"
-      if profile_params[:password]=="nice"
+    if profile_params[:username]=="jurnal"
+      if profile_params[:password]=="123456"
         redirect_to profile_welcomes_path
       else
         set_new_init 

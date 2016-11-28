@@ -22,7 +22,6 @@ class WelcomesController < ApplicationController
   end
 
   def push_to_webhook
-    binding.pry
     webhook_param = params[:notification]
     webhook_record = TableWebhookRecord.new
 

@@ -11,7 +11,7 @@ class WelcomesController < ApplicationController
   end
 
   def webhook_history_log
-    @records = TableWebhookRecord.all
+    @records = TableWebhookRecord.all.order(id: :desc)
   end
 
   def delete_webhook

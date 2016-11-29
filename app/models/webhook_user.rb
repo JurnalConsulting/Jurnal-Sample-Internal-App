@@ -48,6 +48,7 @@ class WebhookUser < ActiveRecord::Base
     require 'json'
     require 'net/http'
     require 'uri'
+    TableWebhookRecord.delete_all
     url = "#{JURNAL_ENDPOINT}/core/dev/oauth/webhooks?client_id=#{APP_CLIENT_ID}&access_token=#{access_token}"
     encoded_url = URI.encode(url)
     uri = URI.parse(encoded_url)

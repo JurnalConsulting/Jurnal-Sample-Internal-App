@@ -49,7 +49,7 @@ class WebhookUser < ActiveRecord::Base
     require 'net/http'
     require 'uri'
 
-    self.reset_webhook_record
+    reset_webhook_record
     
     url = "#{JURNAL_ENDPOINT}/core/dev/oauth/webhooks?client_id=#{APP_CLIENT_ID}&access_token=#{access_token}"
     encoded_url = URI.encode(url)
@@ -68,7 +68,7 @@ class WebhookUser < ActiveRecord::Base
     end
   end
 
-  def self.reset_webhook_record
+  def reset_webhook_record
     webhook_user = get_webhook_id
     if webhook_user
       records = TableWebhookRecord.where(webhook_user_id: get_webhook_response_id)

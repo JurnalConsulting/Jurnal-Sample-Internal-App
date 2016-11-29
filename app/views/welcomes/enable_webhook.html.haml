@@ -19,7 +19,8 @@
       .col-lg-6.col-md-6.col-sm-6
         = button_to "Back", profile_welcomes_path, class: "btn btn-primary",method: 'get'
       .col-lg-6.col-md-6.col-sm-6.text-right
-        = button_to "Webhook History Log", webhook_history_log_welcomes_path, class: "btn btn-success",method: 'get'
+        .btn.btn-success.webhook-history-log
+          Webhook History Log 
         
     .row.footer
       .col-lg-12.text-right

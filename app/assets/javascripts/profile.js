@@ -38,6 +38,10 @@ $(document).ready(function(){
     window.location.replace(window.location.origin +"/welcomes/enable_webhook"+ "?access_token=" + JurnalIntegration.get_access_token());
   });
 
+  $('.webhook-history-log').click(function(){
+    window.location.replace(window.location.origin +"/welcomes/webhook_history_log"+ "?access_token=" + JurnalIntegration.get_access_token());
+  });
+
   $('.add-sales-invoice').click(function(){
     window.location.replace(window.location.origin +"/welcomes/new_sales_invoice"+ "?access_token=" + JurnalIntegration.get_access_token());
   });

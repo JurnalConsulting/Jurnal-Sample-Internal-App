@@ -11,7 +11,10 @@ class WelcomesController < ApplicationController
   end
 
   def webhook_history_log
-    @records = TableWebhookRecord.all.order(id: :desc)
+    @webhook_user = WebhookUser.new(jurnal_access_token: params[:access_token])
+    if @webhook_user.get_webhook_id
+      @records = TableWebhookRecord.where(webhook_user_id: @webhook_user.get_webhook_response_id).order(id: :desc)
+    end
   end
 
   def delete_webhook
@@ -28,6 +31,7 @@ class WelcomesController < ApplicationController
     webhook_record.topic = webhook_param[:object]
     webhook_record.content = webhook_param[:object_details]
     webhook_record.action =  webhook_param[:action]
+    webhook_record.webhook_user_id = request.headers['HTTP_WEBHOOK_USER_ID']
     if webhook_record.save
       puts "berhasil"
       render json: {}, status: 200
@@ -57,7 +61,6 @@ class WelcomesController < ApplicationController
   def enable_webhook
     @webhook_user = WebhookUser.new(jurnal_access_token: params[:access_token])
     if !@webhook_user.get_webhook_id
-      TableWebhookRecord.delete_all
       @webhook_user.create_webhook_id
     end
   end

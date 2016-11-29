@@ -48,7 +48,9 @@ class WebhookUser < ActiveRecord::Base
     require 'json'
     require 'net/http'
     require 'uri'
-    TableWebhookRecord.delete_all
+
+    self.reset_webhook_record
+    
     url = "#{JURNAL_ENDPOINT}/core/dev/oauth/webhooks?client_id=#{APP_CLIENT_ID}&access_token=#{access_token}"
     encoded_url = URI.encode(url)
     uri = URI.parse(encoded_url)
@@ -63,6 +65,16 @@ class WebhookUser < ActiveRecord::Base
     else
       self.code = res.code
       return true
+    end
+  end
+
+  def self.reset_webhook_record
+    webhook_user = get_webhook_id
+    if webhook_user
+      records = TableWebhookRecord.where(webhook_user_id: get_webhook_response_id)
+      if records.present?
+        records.delete_all
+      end
     end
   end
 

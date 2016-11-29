@@ -11,14 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161122092642) do
+ActiveRecord::Schema.define(version: 20161129060434) do
 
   create_table "table_webhook_records", force: :cascade do |t|
-    t.string   "topic",      limit: 255
-    t.text     "content",    limit: 65535
+    t.string   "topic",           limit: 255
+    t.text     "content",         limit: 65535
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "action",     limit: 255
+    t.string   "action",          limit: 255
+    t.string   "webhook_user_id", limit: 255
   end
 
   create_table "webhook_users", force: :cascade do |t|

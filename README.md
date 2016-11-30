@@ -1,1 +1,2 @@
-# Jurnal-Developer-Center-Sample-App
+# Jurnal Developer Sample Application
+

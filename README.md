@@ -4,22 +4,22 @@ Jurnal has created a new feature called Jurnal AppStore which 3rd party develope
 <h2>Jurnal App Store</h2>
 You can access our developer platform in https://developer.jurnal.id. In this website you can register your application.
 <h4>Glossary</h4>
-  <h5>Basic Information</h5>
-    - App Name: Application Name.
-    - App Icon: Application Icon.
-    - App URL: Callback URL of your application which Jurnal will render it for the first time.
-    - App Short Description: Short Description of your application (150 characters minimum and 366 characters maximum).
-    - Scope: Your application credential to access user's data.
-  <h5>App Store Listing</h5>
-    - Request for Beta: Request your application to Jurnal admin to be visible by Jurnal users with 'Beta' status once your application is approved.   
-    - Request for Publication: Request your application to Jurnal admin to be visible by Jurnal users once your application is approved.
-    - Banner: Banner images of your application. You can insert up to 5 banners to your application.
-    - Youtube URL: Your application youtube link(in case you have it).
-    - Full Description: A full description which describes your application.
-    - Manual URL: Your manual link of your application guide book
-    - Email: Your application/company email.
-    - Phone: Your application/company phone.
-    - Website URL: Your application/company website URL.
+<strong>Basic Information</strong>
+  - App Name: Application Name.
+  - App Icon: Application Icon.
+  - App URL: Callback URL of your application which Jurnal will render it for the first time.
+  - App Short Description: Short Description of your application (150 characters minimum and 366 characters maximum).
+  - Scope: Your application credential to access user's data.
+<strong>App Store Listing</strong>
+  - Request for Beta: Request your application to Jurnal admin to be visible by Jurnal users with 'Beta' status once your application is approved.   
+  - Request for Publication: Request your application to Jurnal admin to be visible by Jurnal users once your application is approved.
+  - Banner: Banner images of your application. You can insert up to 5 banners to your application.
+  - Youtube URL: Your application youtube link(in case you have it).
+  - Full Description: A full description which describes your application.
+  - Manual URL: Your manual link of your application guide book
+  - Email: Your application/company email.
+  - Phone: Your application/company phone.
+  - Website URL: Your application/company website URL.
 
 # Sample App
 This is a sample application to <strong>guide</strong> you to create applications in Jurnal. 

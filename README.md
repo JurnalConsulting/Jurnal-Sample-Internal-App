@@ -4,12 +4,14 @@ Jurnal has created a new feature called Jurnal AppStore which 3rd party develope
 <h2>Jurnal App Store</h2>
 You can access our developer platform in https://developer.jurnal.id. In this website you can register your application.
 <h3>Glossary</h3>
+
 <h4>Basic Information</h4>
   - App Name: Application Name.
   - App Icon: Application Icon.
   - App URL: Callback URL of your application which Jurnal will render it for the first time.
   - App Short Description: Short Description of your application (150 characters minimum and 366 characters maximum).
   - Scope: Your application credential to access user's data.
+  
 <h4>App Store Listing</h4>
   - Request for Beta: Request your application to Jurnal admin to be visible by Jurnal users with 'Beta' status once your application is approved.   
   - Request for Publication: Request your application to Jurnal admin to be visible by Jurnal users once your application is approved.

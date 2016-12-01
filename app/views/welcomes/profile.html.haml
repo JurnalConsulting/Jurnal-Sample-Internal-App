@@ -9,15 +9,12 @@
             %h3
               Welcome
     .content
-      .row.adjust-margin-left.access-token-info
-        .row
-          .btn.btn-primary.btn-get-token
-            Get Access Token
-          .setting-tooltip{:style => "display : inline;text-align:right"}
-            .fa.fa-question-circle.fa-1x.tooltip-trigger-settings{ :title => "This button triggers a Javascript action called JurnalIntegration.get_access_token() to get the access token given from Jurnal to access user data", :rel => "tooltip", 'data-placement' => 'right', :data => {:toggle=>"tooltip"} }
+      .row.adjust-margin-left.access-token-info      
         .row.access-token-div
           %h4
             Your Access Token is 
+            .setting-tooltip{:style => "display : inline;text-align:right"}
+            .fa.fa-question-circle.fa-1x.tooltip-trigger-settings{ :title => "This button triggers a Javascript action called JurnalIntegration.get_access_token() to get the access token given from Jurnal to access user data", :rel => "tooltip", 'data-placement' => 'right', :data => {:toggle=>"tooltip"} }
             %br
               %code#profile-access-token
                 

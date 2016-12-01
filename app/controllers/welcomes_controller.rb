@@ -33,10 +33,10 @@ class WelcomesController < ApplicationController
     webhook_record.action =  webhook_param[:action]
     webhook_record.webhook_user_id = request.headers['HTTP_WEBHOOK_USER_ID']
     if webhook_record.save
-      puts "berhasil"
+      puts "success"
       render json: {}, status: 200
     else
-      puts "gagal"
+      puts "fail"
       render json: {}, status: 422
     end
   end
@@ -75,6 +75,7 @@ class WelcomesController < ApplicationController
     @new_invoice = Synchronize.new(jurnal_access_token: params[:access_token])
     @deposit_account_collection = @new_invoice.get_company_deposit_account
     @customers_collection = @new_invoice.get_customers
+    @products_collection = @new_invoice.get_products
   end
 
   def create_sales_invoice

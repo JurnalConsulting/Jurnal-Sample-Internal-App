@@ -29,6 +29,11 @@
                   Deposit Account
                 .col-lg-8.col-md-8.col-sm-8
                   = f.input :deposit_account, label: false, collection: @deposit_account_collection,selected: @deposit_account_collection.first, input_html: { class: 'simple-form-input' }
+              .row.form-group
+                .col-lg-4.col-md-4.col-sm-4
+                  Product
+                .col-lg-8.col-md-8.col-sm-8
+                  = f.input :product, label: false, collection: @products_collection.sort.map{|k,v| [v,k]},selected: @products_collection.sort.map{|k,v| [v,k]}.first, input_html: { class: 'simple-form-input' }
               - if @new_invoice.error_message.present?
                 .row.red-alert.center 
                   = @new_invoice.error_message

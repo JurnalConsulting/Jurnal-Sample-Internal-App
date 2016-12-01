@@ -4,7 +4,8 @@ class Synchronize
   extend ActiveModel::Naming
 
   attr_accessor :jurnal_access_token, :response_body, :code, :type,
-                :transaction_no,:deposit_account,:customer,:error_message
+                :transaction_no,:deposit_account,:customer,:error_message,
+                :product
 
   APP_CLIENT_ID = ENV['APP_CLIENT_ID']
   JURNAL_ENDPOINT = ENV['JURNAL_BASE_PATH']
@@ -15,10 +16,15 @@ class Synchronize
     @transaction_no = params[:transaction_no]
     @deposit_account = params[:deposit_account]
     @customer = params[:customer]
+    @product = params[:product]
   end
 
   def customer
     @customer
+  end
+
+  def product
+    @product
   end
 
   def transaction_no
@@ -49,7 +55,9 @@ class Synchronize
     if get_items.present?
       deposit_account_collection = set_into_array_of_account_name(get_items.select{|v|v["category"]["name"]=="Cash & Bank"})
       return deposit_account_collection
-    else return ['cant get items']
+    elsif self.code != '200' 
+      return ['cant get items']
+    else return ['-']
     end
   end
 
@@ -58,7 +66,21 @@ class Synchronize
     if get_items.present?
       customers_collection = get_items.map{|v|v["display_name"]}
       return customers_collection
-    else return ['cant get items']
+    elsif self.code != '200' 
+      return ['cant get items']
+    else return ['-']
+    end
+  end
+
+  def get_products
+    @type = "products"
+    if get_items.present?
+      products_collection = get_items.map{|v|v["name"]}
+      id_collection = get_items.map{|v|v["id"]}
+      return Hash[id_collection.zip(products_collection)]
+    elsif self.code != '200' 
+      return ['cant get items']
+    else return ['-']
     end
   end
 
@@ -71,6 +93,8 @@ class Synchronize
   end
 
   def add_sales_invoice_to_jurnal
+    product_data = get_product_by_id
+    @type = "sales_invoices"
     require 'json'
     require 'net/http'
     require 'uri'
@@ -81,7 +105,7 @@ class Synchronize
     http.read_timeout = 600
     http.use_ssl = true
     request = Net::HTTP::Post.new(uri.request_uri,{'Content-Type' => 'application/json'})
-    request.body = sales_invoice_body.to_json
+    request.body = sales_invoice_body(product_data).to_json
     res = http.request(request)  
     data = JSON.parse(res.body)
     if res.code != "201"
@@ -92,6 +116,13 @@ class Synchronize
       self.response_body = data[type.singularize]
       self.code = res.code
       return true
+    end
+  end
+
+  def get_product_by_id
+    @type = "products/#{self.product}"
+    if self.sync_to_jurnal
+      return self.response_body["product"]
     end
   end
 
@@ -115,7 +146,6 @@ class Synchronize
     else
       self.response_body = data[type]
       self.code = res.code
-      raise
       return true
     end
   end
@@ -138,7 +168,7 @@ class Synchronize
       self.code = res.code
       return false
     else
-      self.response_body = data[type]
+      self.response_body = data[type] || data
       self.code = res.code
       return true
     end
@@ -153,7 +183,7 @@ class Synchronize
   end
 
   private
-  def sales_invoice_body
+  def sales_invoice_body(product)
     {"sales_invoice"=>
         {"transaction_date"=>"2016-07-06",
           "tax_name"=>"",
@@ -162,18 +192,18 @@ class Synchronize
           "transaction_lines_attributes"=>
           [
             {
-              "amount"=>1000,
+              "amount"=>product["sell_price_per_unit"],
               "quantity"=>1,
-              "rate"=>1000,
+              "rate"=>product["sell_price_per_unit"],
               "discount"=>0,
               "tax"=>false,
-              "product_name"=>"Sales"
+              "product_name"=>product["name"]
             }
           ],
           "discount_unit"=>0,
           "discount_type_name"=>"Value",
           "deposit_to_name"=>self.deposit_account,
-          "deposit"=>500,
+          "deposit"=>product["sell_price_per_unit"],
           "transaction_no"=>self.transaction_no}}
   end
 end

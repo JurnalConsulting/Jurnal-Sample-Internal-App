@@ -4,8 +4,6 @@
 
 
 $(document).ready(function(){
-  $('.access-token-div').hide();
-  $('.action-div').hide();
 
   $('.tooltip-trigger-settings').poshytip({
     className: 'tip-twitter',
@@ -20,11 +18,7 @@ $(document).ready(function(){
     slide: false
   });
 
-  $('.btn-get-token').click(function(){
-    $('.access-token-div').show();
-    $('.action-div').show();
-    $('#profile-access-token').text(JurnalIntegration.get_access_token());
-  });
+  $('#profile-access-token').text(JurnalIntegration.get_access_token());
 
   $('.fetch-customer').click(function(){
     window.location.replace(window.location.origin +"/welcomes/sync_response"+ "?access_token=" + JurnalIntegration.get_access_token() + "&type=customers");

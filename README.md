@@ -97,6 +97,8 @@ Every time user who has the webhook user ID create, update, or delete data in Ju
 
 By this format you can use it by your own purpose.
 
+To use webhook in the development, we provide <a href='https://ngrok.com/'>ngrok<a> so webhook service can access to your localhost. run <code>./ngrok http -region ap 2000</code> for Mac or <code>ngrok http -region ap 2000</code> for Windows. Then update your app callback URL with URL given by the ngrok
+
 
 
   

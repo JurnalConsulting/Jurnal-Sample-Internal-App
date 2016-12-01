@@ -22,6 +22,26 @@ You can access our developer platform in https://developer.jurnal.id. In this we
   - Email: Your application/company email.
   - Phone: Your application/company phone.
   - Website URL: Your application/company website URL.
+  
+# Access Token
+
+Once Jurnal render your application, your application will be given the access token to to access user's data. We generate the access token for your application and we will give it to your application via Javascript's <code>postMessage()</code> method. You have to implement the receiver but don't worry, we already create a javascript library for you to create the receiver in <a href= 'https://github.com/squadronjurnal/Jurnal-Integration-Library'>here</a>.
+
+<h3> How to use the library </h3>
+  - Use the script in your application callback URL page. The script contains <code>JurnalIntegration</code> object that will receive the access_token given from Jurnal and store it with the <a href='https://developer.mozilla.org/en-US/docs/Web/API/Window/sessionStorage'>sessionStorage()</a> method
+  - Once you get the access token, you can use the access token by add the script in the defined page and call <code>JurnalIntegration.get_access_token()</code>.
+  
+The access token will be give to your application every time user open your application.
+
+# Rendering 3rd Party Application
+
+If you want to try your registered application to be rendered in application, here's what you can do:
+  - Go to the developer center and go to your application. Then click 'App Store Listing'. 
+  - Your application is currenctly unpublished, but you can access it in Jurnal by clicking link in top of the page
+  - You will be redirected to Jurnal. Click 'Install'
+  - Once you installed your app, your application will be registered as add on in your Jurnal's account.
+  - Click 'Open'
+  - Your application will be rendered inside Jurnal's application.
 
 # Sample App
 This is a sample application to <strong>guide</strong> you to create applications in Jurnal. 
@@ -48,5 +68,48 @@ This is a sample application to <strong>guide</strong> you to create application
       APP_CLIENT_ID= your application client ID
       JURNAL_BASEPATH= Jurnal API endpoint (https://api.jurnal.id for my.jurnal.id or https://sandbox-api.jurnal.id for sandbox.jurnal.id)
     </pre>
+    
+# Webhook
+
+To activate webhook, you have to register it from your application using<br>
+<code>POST https://api.jurnal.id/core/dev/oauth/webhooks?client_id={your_application_client_ID}&access_token={the_access_token_given}</code><br>
+We give you the webhook user id. This webhook user ID will be unique per user who install your application.
+
+To get current webhook, you can use <br>
+<code>GET https://api.jurnal.id/core/dev/oauth/webhooks?client_id={your_application_client_ID}&access_token={the_access_token_given}</code><br>
+
+To inactivate current webhook, you can use <br>
+<code>DELETE https://api.jurnal.id/core/dev/oauth/webhooks?client_id={your_application_client_ID}&access_token={the_access_token_given}</code><br>
+
+*note =if you test it in sandbox.jurnal.id, use https://sandbox-api.jurnal.id instead of  https://api.jurnal.id
+
+Every time user who has the webhook user ID create, update, or delete data in Jurnal, our webhook service will send the data that's user manipulated to your callback URL with POST method with user's <strong>webhook user ID as the header</strong>. The format body that is:
+<pre>
+  {
+    "notification":{
+        "company_id: {user's company ID in Jurnal} -> integer
+        "action": {user's action} -> string
+        "object":{data subject that is user's manipulated} -> string
+        "object_details":{the data detail} -> hash
+    }
+  }
+</pre>
+
+By this format you can use it by your own purpose.
+
+
+
+  
+
+
+    
+
+    
+
+
+
+  
+ 
+
 
 

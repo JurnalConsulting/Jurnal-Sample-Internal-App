@@ -27,7 +27,6 @@ class WelcomesController < ApplicationController
   def push_to_webhook
     webhook_param = params[:notification]
     webhook_record = TableWebhookRecord.new
-
     webhook_record.topic = webhook_param[:object]
     webhook_record.content = webhook_param[:object_details]
     webhook_record.action =  webhook_param[:action]
@@ -72,6 +71,7 @@ class WelcomesController < ApplicationController
   end
 
   def new_sales_invoice
+    # params[:access_token] = "11bf357bb2c6409381259681e84afbb1"
     @new_invoice = Synchronize.new(jurnal_access_token: params[:access_token])
     @deposit_account_collection = @new_invoice.get_company_deposit_account
     @customers_collection = @new_invoice.get_customers

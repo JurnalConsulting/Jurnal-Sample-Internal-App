@@ -53,7 +53,7 @@ class Synchronize
   def get_company_deposit_account
     @type = "accounts"
     if get_items.present?
-      deposit_account_collection = set_into_array_of_account_name(get_items.select{|v|v["category"]["name"]=="Cash & Bank"})
+      deposit_account_collection = set_into_array_of_account_name(get_items.select{|v|v["category_id"] == 3})
       return deposit_account_collection
     elsif self.code != '200' 
       return ['cant get items']
@@ -139,6 +139,7 @@ class Synchronize
     request = Net::HTTP::Post.new(uri.request_uri)
     res = http.request(request)  
     data = JSON.parse(res.body)
+    Rails.logger.info(res)
     if res.code != "200"
       self.response_body = data
       self.code = res.code
@@ -163,6 +164,8 @@ class Synchronize
     request = Net::HTTP::Get.new(uri.request_uri)
     res = http.request(request)  
     data = JSON.parse(res.body)
+    puts res.body
+    puts res.code
     if res.code != "200"
       self.response_body = data
       self.code = res.code
